@@ -12,8 +12,6 @@ module Al
       new.adjacent point
     end
 
-    private
-
     def adjacent(point)
       POSSIBLE_MOVES.inject([]) do |list, move|
         new_point = point + move
