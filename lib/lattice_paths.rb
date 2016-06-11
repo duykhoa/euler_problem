@@ -1,7 +1,7 @@
-module Al
-  Point = Struct.new(:x, :y)
-  Size = Point
+require_relative './point'
+require_relative './adjacent'
 
+module Al
   class LatticePaths
     attr_reader :x, :y
 
