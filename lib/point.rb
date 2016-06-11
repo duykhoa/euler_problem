@@ -1,14 +1,22 @@
 module Al
-  Point = Struct.new(:x, :y) do
+  module Add
     def +(point)
       Point.new(x + point.x, y + point.y)
     end
+  end
 
-    def valid?
-      x >= 0 && y >= 0
+  Point = Struct.new(:x, :y) do
+    include Add
+
+    def valid?(max_point)
+      x >= 0 && y >= 0 &&
+        x <= max_point.x && y <= max_point.y
     end
   end
 
-  Movement = Point
-  Size = Point
+  Movement = Struct.new(:x, :y) do
+    include Add
+  end
+
+  Size = Struct.new(:x, :y)
 end

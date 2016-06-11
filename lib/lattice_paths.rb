@@ -1,5 +1,6 @@
 require_relative './point'
 require_relative './adjacent'
+require_relative './route_finder'
 
 module Al
   class LatticePaths
@@ -25,6 +26,9 @@ module Al
 
     def end_point
       Point.new(x, y)
+    end
+
+    def find_route
     end
   end
 end

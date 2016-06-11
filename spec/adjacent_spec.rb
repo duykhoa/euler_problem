@@ -1,11 +1,12 @@
 require_relative './spec_helper'
 
 describe Al::Adjacent do
+  let(:max_point) { Al::Point.new(2, 2) }
 
   describe "#for" do
     describe "point is 0, 0" do
       let(:point) { Al::Point.new(0, 0) }
-      let(:adjacent) { Al::Adjacent.for(point) }
+      let(:adjacent) { Al::Adjacent.for(point, max_point) }
 
       it "must include 1, 0" do
         adjacent.must_include Al::Point.new(1, 0)
@@ -30,7 +31,7 @@ describe Al::Adjacent do
 
    describe "point is 1, 1" do
       let(:point) { Al::Point.new(1, 1) }
-      let(:adjacent) { Al::Adjacent.for(point) }
+      let(:adjacent) { Al::Adjacent.for(point, max_point) }
 
       it "must include 1, 0" do
         adjacent.must_include Al::Point.new(1, 0)

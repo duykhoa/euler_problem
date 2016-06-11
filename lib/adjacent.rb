@@ -8,14 +8,20 @@ module Al
         Movement.new(0, -1),
       ].freeze
 
-    def self.for(point)
-      new.adjacent point
+    attr_reader :max_point
+
+    def initialize(max_point)
+      @max_point = max_point
+    end
+
+    def self.for(point, max_point)
+      new(max_point).adjacent point
     end
 
     def adjacent(point)
       POSSIBLE_MOVES.inject([]) do |list, move|
         new_point = point + move
-        new_point.valid? ? list << new_point : list
+        new_point.valid?(max_point) ? list << new_point : list
       end
     end
   end
