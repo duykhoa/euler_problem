@@ -1,4 +1,6 @@
 require 'minitest'
 require 'minitest/autorun'
 
-require_relative '../lib/problem_1/main'
+Dir[File.join(__dir__, "../lib/**/*.rb")].each do |file|
+  require file
+end
