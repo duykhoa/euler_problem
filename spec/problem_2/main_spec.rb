@@ -11,5 +11,10 @@ describe Problem_2::Main do
       caller = Problem_2::Main.new(22)
       caller.solve.must_equal 43
     end
+
+    it "max 4_000_000" do
+      caller = Problem_2::Main.new(4_000_000)
+      caller.solve.must_equal 4613731
+    end
   end
 end
