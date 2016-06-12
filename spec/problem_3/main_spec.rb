@@ -25,6 +25,11 @@ describe Problem_3::Main do
       it { solver.solve.must_equal 7 }
     end
 
+    describe "for 600851475143" do
+      let(:num) { 600851475143 }
+      it { solver.solve.must_equal 6857 }
+    end
+
     describe "for 35" do
       let(:num) { 35 }
       it { solver.solve.must_equal 7 }
