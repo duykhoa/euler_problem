@@ -26,8 +26,9 @@ module Problem_96
       fill(matrix)
     end
 
-    def fill(matrix)
+    def fill(matrix, count = 0)
       has_empty = false
+      _count = count || 0
 
       (0...SIZE).each do |i|
         (0...SIZE).each do |j|
@@ -36,16 +37,21 @@ module Problem_96
               if checker.check(matrix, i, j, value)
                 duplicate_array = duplicator.call(matrix)
                 duplicate_array[i][j] = value
+
+                _count += 1
+
+                fill(duplicate_array, _count)
+                print duplicate_array
+                exit if _count == count_empty(duplicate_array) || _count == 2
               end
             end
           end
         end
       end
-
-      return matrix unless has_empty
     end
 
-    def fill_in(matrix, i, j)
+    def count_empty(matrix)
+      matrix.flatten.count(0)
     end
 
     def checker
