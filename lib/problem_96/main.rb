@@ -27,13 +27,18 @@ module Problem_96
     end
 
     def fill(matrix)
+      has_empty = false
+
       (0...SIZE).each do |i|
         (0...SIZE).each do |j|
-          fill_in(matrix, i, j) if matrix[i, j] == 0
+          if matrix[i][j] == 0
+            has_empty = true
+            fill_in(matrix, i, j)
+          end
         end
       end
 
-      return matrix if matrix[SIZE - 1][SIZE - 1] != 0
+      return matrix unless has_empty
     end
 
     def fill_in(matrix, i, j)
@@ -53,6 +58,13 @@ module Problem_96
 
     def duplicator
       @duplicator ||= DuplicateArray.new
+    end
+
+    def print(matrix)
+      matrix.each do |arr|
+        puts arr.inspect
+      end
+      puts "----"
     end
   end
 end
