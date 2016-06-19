@@ -32,8 +32,12 @@ module Problem_96
       (0...SIZE).each do |i|
         (0...SIZE).each do |j|
           if matrix[i][j] == 0
-            has_empty = true
-            fill_in(matrix, i, j)
+            (1..9).each do |value|
+              if checker.check(matrix, i, j, value)
+                duplicate_array = duplicator.call(matrix)
+                duplicate_array[i][j] = value
+              end
+            end
           end
         end
       end
@@ -42,14 +46,6 @@ module Problem_96
     end
 
     def fill_in(matrix, i, j)
-      (1..9).each do |value|
-        if checker.check(matrix, i, j, value)
-          duplicate_array = duplicator.call(matrix)
-          duplicate_array[i][j] = value
-
-          fill(duplicate_array)
-        end
-      end
     end
 
     def checker
