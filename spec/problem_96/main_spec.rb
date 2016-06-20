@@ -1,7 +1,7 @@
 require_relative '../spec_helper'
 
 describe Problem_96::Main do
-  let(:sudoku_matrix) { 
+  let(:matrix) { 
     [
       [0, 0, 3, 0, 2, 0, 6, 0, 0],
       [9, 0, 0, 3, 0, 5, 0, 0, 1],
@@ -15,4 +15,27 @@ describe Problem_96::Main do
     ]
   }
 
+  def cell_value(matrix, cell)
+    solver.fill_in(matrix, cell).map do |matrix|
+      matrix[cell.x][cell.y]
+    end
+  end
+
+  describe "#fill_in" do
+    let(:solver) { Problem_96::Main.new(matrix) }
+
+    it do
+      cell = Problem_96::Cell.new(0, 0)
+      result = cell_value(matrix, cell)
+      result.size.must_equal 2
+      result.must_equal [4,5]
+    end
+
+    it do
+      cell = Problem_96::Cell.new(8, 8)
+      result = cell_value(matrix, cell)
+      result.size.must_equal 4
+      result.must_equal [2,4,6,7]
+    end
+  end
 end
