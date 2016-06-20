@@ -30,12 +30,15 @@ module Problem_96
     end
 
     def fill(matrix)
-      cell = find_empty_cell(matrix)
+      cells = find_empty_cell(matrix)
 
-      if cell
-        new_matrices = fill_in(matrix, cell)
-        new_matrices.each do |new_matrix|
-          fill(matrix)
+      if cells.any?
+        cells.each do |cell|
+          new_matrices = fill_in(matrix, cell)
+          new_matrices.each do |new_matrix|
+            print new_matrix
+            fill(new_matrix)
+          end
         end
       else
         print matrix

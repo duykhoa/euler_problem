@@ -12,7 +12,7 @@ describe Problem_96::EmptyCellFinder do
         [0, 0, 1]
       ]
 
-      finder.find(matrix).must_equal Problem_96::Cell.new(0, 0)
+      finder.find(matrix).must_include Problem_96::Cell.new(0, 0)
     end
 
     it do
@@ -22,19 +22,9 @@ describe Problem_96::EmptyCellFinder do
         [9, 1, 2],
         [1, 2, 0]
       ]
-
-      finder.find(matrix).must_equal Problem_96::Cell.new(2, 2)
-    end
-
-    it do
-      matrix =
-      [
-        [1, 1, 3],
-        [0, 1, 2],
-        [0, 2, 0]
-      ]
-
-      finder.find(matrix).must_equal Problem_96::Cell.new(1, 0)
+      result = finder.find(matrix)
+      result.must_include Problem_96::Cell.new(2, 2)
+      result.size.must_equal 1
     end
 
     it do
@@ -45,7 +35,7 @@ describe Problem_96::EmptyCellFinder do
         [5, 2, 4]
       ]
 
-      finder.find(matrix).must_equal nil
+      finder.find(matrix).must_equal []
     end
   end
 end
