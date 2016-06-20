@@ -3,17 +3,20 @@
 # Solution idea
 #
 # To solve the sudoku problem, we just apply the bruteforce approach
-# For each empty cell (value 0), we try to fillin with a number from 1-9
+# For each empty cell (value 0), we try to fill in with a number from 1-9
 #
 # If a cell is filled with a value, we move on
 #
 
 require_relative './duplicate_array'
+require_relative './empty_cell_finder'
 require_relative './checker'
 
 module Problem_96
+  Cell = Struct.new(:x, :y)
+  SIZE = 9
+
   class Main
-    SIZE = 9
 
     attr_reader :sudoku_matrix
 
@@ -26,32 +29,38 @@ module Problem_96
       fill(matrix)
     end
 
-    def fill(matrix, count = 0)
-      has_empty = false
-      _count = count || 0
-
-      (0...SIZE).each do |i|
-        (0...SIZE).each do |j|
-          if matrix[i][j] == 0
-            (1..9).each do |value|
-              if checker.check(matrix, i, j, value)
-                duplicate_array = duplicator.call(matrix)
-                duplicate_array[i][j] = value
-
-                _count += 1
-
-                fill(duplicate_array, _count)
-                print duplicate_array
-                exit if _count == count_empty(duplicate_array) || _count == 2
-              end
-            end
-          end
+    def fill(matrix)
+      cell = find_empty_cell(matrix)
+      if cell
+        new_matrices = fill_in(matrix, cell)
+        new_matrices.each do |new_matrix|
+          fill(matrix)
         end
+      else
+        print matrix
       end
     end
 
-    def count_empty(matrix)
-      matrix.flatten.count(0)
+    def fill_in(matrix, cell)
+      matrices = []
+
+      (1..9).each do |value|
+        if checker.check(matrix, cell.x, cell.y, value)
+          matrices << new_matrix_with_value(matrix, cell, value)
+        end
+      end
+
+      matrices
+    end
+
+    def find_empty_cell(matrix)
+      EmptyCellFinder.find(matrix)
+    end
+
+    def new_matrix_with_value(matrix, cell, value)
+      new_matrix = duplicator.call(matrix)
+      new_matrix[cell.x][cell.y] = value
+      new_matrix
     end
 
     def checker
