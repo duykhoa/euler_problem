@@ -15,21 +15,4 @@ describe Problem_96::Main do
     ]
   }
 
-  #describe "#fill_in" do
-    #let(:solver) { Problem_96::Main.new(sudoku_matrix) }
-
-    #it do
-      #solver.stub(:fill, true) do
-        #solver.fill_in(sudoku_matrix, 0, 0)
-      #end
-    #end
-  #end
-
-  describe "#fill" do
-    let(:solver) { Problem_96::Main.new(sudoku_matrix) }
-
-    it do
-      #result = solver.fill(sudoku_matrix)
-    end
-  end
 end

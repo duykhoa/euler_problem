@@ -31,6 +31,7 @@ module Problem_96
 
     def fill(matrix)
       cell = find_empty_cell(matrix)
+
       if cell
         new_matrices = fill_in(matrix, cell)
         new_matrices.each do |new_matrix|
@@ -38,6 +39,7 @@ module Problem_96
         end
       else
         print matrix
+        exit
       end
     end
 
