@@ -1,4 +1,3 @@
-require 'byebug'
 module Problem_96
   class Checker
     SIZE = 9
