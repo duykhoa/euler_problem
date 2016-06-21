@@ -22,6 +22,7 @@ module Problem_96
 
     def initialize(sudoku_matrix = [])
       @sudoku_matrix = sudoku_matrix
+      @counter = 0
     end
 
     def solve
@@ -30,11 +31,16 @@ module Problem_96
     end
 
     def fill(matrix)
+      @counter > 20 ? exit : @counter += 1
+
       cells = find_empty_cell(matrix)
 
       if cells.any?
         cells.each do |cell|
           new_matrices = fill_in(matrix, cell)
+
+          return unless new_matrices.any?
+
           new_matrices.each do |new_matrix|
             print new_matrix
             fill(new_matrix)
