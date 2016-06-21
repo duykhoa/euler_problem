@@ -18,37 +18,35 @@ module Problem_96
 
   class Main
 
-    attr_reader :sudoku_matrix
+    attr_reader :counter, :solution
 
-    def initialize(sudoku_matrix = [])
-      @sudoku_matrix = sudoku_matrix
+    def initialize
       @counter = 0
     end
 
-    def solve
-      matrix = sudoku_matrix
-      fill(matrix)
+    def solve(sudoku_matrix)
+      @solution = nil
+      fill(sudoku_matrix)
+      @solution
     end
 
     def fill(matrix)
-      @counter > 20 ? exit : @counter += 1
+      @counter += 1
 
-      cells = find_empty_cell(matrix)
+      cell = find_empty_cell(matrix)
 
-      if cells.any?
-        cells.each do |cell|
-          new_matrices = fill_in(matrix, cell)
+      if cell
+        new_matrices = fill_in(matrix, cell)
 
-          return unless new_matrices.any?
+        return if new_matrices.empty?
 
-          new_matrices.each do |new_matrix|
-            print new_matrix
-            fill(new_matrix)
-          end
+        new_matrices.each do |new_matrix|
+          fill(new_matrix)
+
+          return if @solution
         end
       else
-        print matrix
-        exit
+        @solution = matrix
       end
     end
 
@@ -86,7 +84,6 @@ module Problem_96
       matrix.each do |arr|
         puts arr.inspect
       end
-      puts "----"
     end
   end
 end
