@@ -33,7 +33,12 @@ describe Problem_13::Plus do
   end
 
   it do
-    result = solver.call("95", "2")
-    result.must_equal "97"
+    result = solver.call("90000005", "2")
+    result.must_equal "90000007"
+  end
+
+  it do
+    result = solver.call("2", "10098")
+    result.must_equal "10100"
   end
 end
