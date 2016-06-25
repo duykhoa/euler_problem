@@ -5,6 +5,14 @@ module Problem_13
       times = num1.length - 1
       result = ''
 
+      max_length = [num1.length, num2.length].max
+
+      if num1.length > num2.length
+        num2.insert 0, "0" * (max_length - num2.length)
+      else
+        num1.insert 0, "0" * (max_length - num1.length)
+      end
+
       (0..times).reverse_each do |i|
         x, memory = add(num1[i], num2[i], memory)
         result.insert 0, x.to_s

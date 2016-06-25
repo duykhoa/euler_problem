@@ -21,4 +21,19 @@ describe Problem_13::Plus do
     result = solver.call("9", "1")
     result.must_equal "10"
   end
+
+  it do
+    result = solver.call("91", "1")
+    result.must_equal "92"
+  end
+
+  it do
+    result = solver.call("99", "1")
+    result.must_equal "100"
+  end
+
+  it do
+    result = solver.call("95", "2")
+    result.must_equal "97"
+  end
 end
